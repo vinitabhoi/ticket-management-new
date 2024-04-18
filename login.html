@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="login.css">
+  <title>Login</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="title-text">
+      <div class="title login">Login / Signup Form</div>
+    </div>
+    <div class="form-container">
+      <div class="slide-controls">
+        <input type="radio" name="slide" id="login" checked>
+        <input type="radio" name="slide" id="signup">
+        <label for="login" class="slide login">Login</label>
+        <label for="signup" class="slide signup">Signup</label>
+        <div class="slider-tab"></div>
+      </div>
+      <div class="form-inner">
+        <form>
+          <div class="field">
+            <input type="email" id="email" placeholder="Email">
+          </div>
+          <div class="field">
+            <input type="password" id="password" placeholder="Password">
+          </div>
+          <div class="button-container">
+            <button type="button" onclick="loginUser()">Login</button>
+            <button type="button" onclick="registerUser()">Register</button>
+        
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+  <script>
+    // Your Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+  apiKey: "AIzaSyC03tnEw0nm3XDQWKvbdCB0pdgY6tD-4RI",
+  authDomain: "notes-e66f7.firebaseapp.com",
+  databaseURL: "https://notes-e66f7-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "notes-e66f7",
+  storageBucket: "notes-e66f7.appspot.com",
+  messagingSenderId: "424238529963",
+  appId: "1:424238529963:web:e1fa2419bfd0f096aa66ee"
+};
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    
+    // Initialize variables
+    const auth = firebase.auth();
+    const database = firebase.database();
+
+    // Register user
+    function registerUser() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(function () {
+          window.location.href = "ticket.html";
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
+    }
+
+    // Login user
+    function loginUser() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(function () {
+          window.location.href = "ticket.html";
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
+    }
+  </script>
+</body>
+</html>
